@@ -1,4 +1,4 @@
-import React, {createContext, useState, useContext} from 'react'
+import React, { createContext, useState, useContext } from 'react'
 
 interface IAuthContext {
     logged: boolean
@@ -9,7 +9,7 @@ interface IAuthContext {
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
-const AuthProvider: React.FC = ({children}) => {
+const AuthProvider: React.FC = ({ children }) => {
     const [logged, setLogged] = useState<boolean>(() => {
         const isLogged = localStorage.getItem('@contas-em-dia:logged')
 
@@ -17,10 +17,10 @@ const AuthProvider: React.FC = ({children}) => {
     })
 
     const signIn = (email: string, password: string) => {
-        if(email === 'admin@email.com' && password === '123'){
+        if (email === 'admin@email.com' && password === '123') {
             localStorage.setItem('@contas-em-dia:logged', 'true')
             setLogged(true)
-        }else {
+        } else {
             alert('Senha ou usuário inválidos!')
         }
     }
@@ -31,7 +31,7 @@ const AuthProvider: React.FC = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value = {{logged, signIn, signOut}}>
+        <AuthContext.Provider value={{ logged, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     )
@@ -45,5 +45,5 @@ function useAuth(): IAuthContext {
     return context
 }
 
-export {AuthProvider, useAuth}
+export { AuthProvider, useAuth }
 
